@@ -2,14 +2,14 @@ package duarte.pereira.appbasket.feature_basket.data.local
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import duarte.pereira.appbasket.feature_basket.data.local.dto.LocalApp
+import duarte.pereira.appbasket.feature_basket.data.local.dto.LocalAppItem
 
 @Database(
-    entities = [LocalApp::class],
+    entities = [LocalAppItem::class],
     version = 1,
     exportSchema = false
 )
-abstract class AppsDatabase: RoomDatabase() {
+abstract class BasketDatabase: RoomDatabase() {
     abstract val dao: BasketDao
 
     companion object {

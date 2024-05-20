@@ -1,4 +1,3 @@
 package duarte.pereira.appbasket.feature_basket.domain.util
 
-class InvalidAppException {
-}
+class InvalidAppException(message: String): Exception(message)

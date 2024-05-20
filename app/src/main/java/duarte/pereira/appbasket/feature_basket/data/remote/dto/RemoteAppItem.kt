@@ -2,7 +2,7 @@ package duarte.pereira.appbasket.feature_basket.data.remote.dto
 
 import com.google.gson.annotations.SerializedName
 
-data class RemoteApp(
+data class RemoteAppItem(
     @SerializedName("name")
     val name: String,
     @SerializedName("package")

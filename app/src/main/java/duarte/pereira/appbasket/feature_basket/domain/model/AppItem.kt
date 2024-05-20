@@ -1,6 +1,6 @@
 package duarte.pereira.appbasket.feature_basket.domain.model
 
-data class App(
+data class AppItem(
     val name: String,
     val packageName: String,
     val icon: Int,

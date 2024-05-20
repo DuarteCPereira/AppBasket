@@ -115,9 +115,9 @@ fun List<RemoteAppItem>.toAppItemListFromRemote(): List<AppItem>  =
         )
     }
 
-fun List<RemoteAppItem>.toLocalItemListFromRemote(): List<RemoteAppItem>  =
+fun List<RemoteAppItem>.toLocalItemListFromRemote(): List<LocalAppItem>  =
     this.map { todo ->
-        RemoteAppItem(
+        LocalAppItem(
             name = todo.name,
             packageName = todo.packageName,
             icon = todo.icon,

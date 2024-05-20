@@ -4,7 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "basket")
-data class LocalApp(
+data class LocalAppItem(
     val name: String,
     val packageName: String,
     val icon: Int,
