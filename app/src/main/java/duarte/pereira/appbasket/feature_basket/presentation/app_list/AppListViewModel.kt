@@ -1,0 +1,64 @@
+package duarte.pereira.appbasket.feature_basket.presentation.app_list
+
+import androidx.compose.runtime.State
+import androidx.compose.runtime.mutableStateOf
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
+import duarte.pereira.appbasket.feature_basket.data.di.IoDispatcher
+import duarte.pereira.appbasket.feature_basket.domain.use_cases.BasketUseCaseResult
+import duarte.pereira.appbasket.feature_basket.domain.use_cases.BasketUseCases
+import duarte.pereira.appbasket.feature_basket.domain.util.Order
+import duarte.pereira.appbasket.feature_basket.domain.util.Sort
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
+import javax.inject.Inject
+
+@HiltViewModel
+class AppListViewModel @Inject constructor(
+    private val basketUseCases: BasketUseCases,
+    @IoDispatcher private val dispatcher: CoroutineDispatcher
+): ViewModel() {
+    private val _appList = mutableStateOf(AppListState(order = Order.Downloads(sort = Sort.Down)))
+    val appList: State<AppListState> = _appList
+
+    private var getAppItemsJob: Job? = null
+    private val errorHandler = CoroutineExceptionHandler {_, e ->
+        e.printStackTrace()
+        _appList.value = _appList.value.copy(
+            error = e.message,
+            isLoading = false
+        )
+    }
+
+    fun getTodoItems(){
+        getAppItemsJob?.cancel()
+
+        getAppItemsJob = viewModelScope.launch(dispatcher + errorHandler) {
+            val result = basketUseCases.getAllAppItems(
+                order = _appList.value.order
+            )
+            when(result){
+                is BasketUseCaseResult.Success -> {
+                    _appList.value = _appList.value.copy(
+                        appItems = result.todoItems,
+                        order = _appList.value.order,
+                        isLoading = false
+                    )
+                }
+                is BasketUseCaseResult.Error -> {
+                    _appList.value = _appList.value.copy(
+                        error = ERROR_LABEL,
+                        isLoading = false
+                    )
+                }
+            }
+        }
+    }
+
+    private companion object {
+        const val ERROR_LABEL = "Error: cant get apps"
+    }
+}
