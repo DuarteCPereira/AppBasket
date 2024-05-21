@@ -31,7 +31,7 @@ object BasketModule {
             .addConverterFactory(
                 GsonConverterFactory.create()
             )
-            .baseUrl("https://ws2.aptoide.com/api/6/bulkRequest/api_list/listApps/")
+            .baseUrl("https://ws2.aptoide.com/api/6/")
             .build()
     }
 

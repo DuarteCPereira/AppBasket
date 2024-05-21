@@ -46,8 +46,11 @@ class AppListRepoImpl(
     }
 
     private suspend fun refreshRoomCache() {
-        val remoteAppItems = api.getAllApps().filterNotNull()
-        dao.addAllApps(remoteAppItems.toLocalItemListFromRemote())
+        val response = api.getAllApps()
+        if (response.isSuccessful && response.body() != null) {
+            dao.addAllApps(response.body()!!.responses.listApps.datasets.all.data.list.toLocalItemListFromRemote())
+        }
+//        dao.addAllApps(remoteAppItems.toLocalItemListFromRemote())
     }
 
     private fun isCacheEmpty(): Boolean = dao.getAllApps().isEmpty()

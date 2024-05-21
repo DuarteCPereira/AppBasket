@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">AppBasket</string>
+    <string name="app_name">AppBasket</string>,
+    <string name="download_button">Download App</string>
 </resources>

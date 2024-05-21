@@ -33,7 +33,19 @@ class AppListViewModel @Inject constructor(
         )
     }
 
-    fun getTodoItems(){
+    fun onSort(order: Order) {
+        val alreadyOrdered =
+            _appList.value.order::class == order::class && _appList.value.order.sort == order.sort
+        if(alreadyOrdered){
+            return
+        }
+        _appList.value = _appList.value.copy(
+            order = order
+        )
+        getAppItems()
+    }
+
+    fun getAppItems(){
         getAppItemsJob?.cancel()
 
         getAppItemsJob = viewModelScope.launch(dispatcher + errorHandler) {
@@ -43,7 +55,7 @@ class AppListViewModel @Inject constructor(
             when(result){
                 is BasketUseCaseResult.Success -> {
                     _appList.value = _appList.value.copy(
-                        appItems = result.todoItems,
+                        appItems = result.appItems,
                         order = _appList.value.order,
                         isLoading = false
                     )

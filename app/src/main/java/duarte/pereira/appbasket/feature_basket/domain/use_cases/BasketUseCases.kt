@@ -43,6 +43,6 @@ class BasketUseCases(
 }
 
 sealed class BasketUseCaseResult {
-    data class Success(val todoItems: List<AppItem>) : BasketUseCaseResult()
+    data class Success(val appItems: List<AppItem>) : BasketUseCaseResult()
     data class Error(val message: String) : BasketUseCaseResult()
 }

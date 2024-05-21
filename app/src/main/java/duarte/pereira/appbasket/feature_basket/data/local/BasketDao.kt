@@ -25,5 +25,5 @@ interface BasketDao {
     // TODO re-think if needed
 /*
     @Delete
-    suspend fun deleteAppItem(todo: LocalApp)*/
+    suspend fun deleteAppItem(app: LocalApp)*/
 }
