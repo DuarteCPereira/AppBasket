@@ -15,6 +15,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import duarte.pereira.appbasket.R
+import duarte.pereira.appbasket.feature_basket.domain.model.AppItem
 
 @Composable
 fun DownloadButton(

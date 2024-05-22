@@ -37,12 +37,12 @@ fun SortingDrawer(
     NavigationDrawerItem(
         label = {
             IconRow(
-                text = "Size",
-                isChecked = appItemOrder::class == Order.Size::class
+                text = "Rating",
+                isChecked = appItemOrder::class == Order.Rating::class
             )
         },
         selected = false,
-        onClick = { onOrderChange(Order.Size(appItemOrder.sort)) }
+        onClick = { onOrderChange(Order.Rating(appItemOrder.sort)) }
     )
 
     Divider()

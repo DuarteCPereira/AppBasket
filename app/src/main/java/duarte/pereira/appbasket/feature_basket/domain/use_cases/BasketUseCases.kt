@@ -4,8 +4,9 @@ import duarte.pereira.appbasket.feature_basket.domain.model.AppItem
 import duarte.pereira.appbasket.feature_basket.domain.repo.AppListRepo
 import duarte.pereira.appbasket.feature_basket.domain.util.Order
 import duarte.pereira.appbasket.feature_basket.domain.util.Sort
+import javax.inject.Inject
 
-class BasketUseCases(
+class BasketUseCases @Inject constructor(
     private val repo: AppListRepo
 ) {
     suspend fun downloadApp() {
@@ -26,15 +27,15 @@ class BasketUseCases(
             is Sort.Down -> {
                 when (order) {
                     is Order.Name -> BasketUseCaseResult.Success(apps.sortedByDescending { it.name.lowercase() })
-                    is Order.Size -> BasketUseCaseResult.Success(apps.sortedByDescending { it.icon })
-                    is Order.Downloads -> BasketUseCaseResult.Success(apps.sortedByDescending { it.icon })
+                    is Order.Rating -> BasketUseCaseResult.Success(apps.sortedByDescending { it.rating })
+                    is Order.Downloads -> BasketUseCaseResult.Success(apps.sortedByDescending { it.downloads })
                 }
             }
             is Sort.Up -> {
                 when (order) {
                     is Order.Name -> BasketUseCaseResult.Success(apps.sortedBy { it.name.lowercase() })
-                    is Order.Size -> BasketUseCaseResult.Success(apps.sortedBy { it.icon })
-                    is Order.Downloads -> BasketUseCaseResult.Success(apps.sortedBy { it.icon })
+                    is Order.Rating -> BasketUseCaseResult.Success(apps.sortedBy { it.rating })
+                    is Order.Downloads -> BasketUseCaseResult.Success(apps.sortedBy { it.downloads })
                 }
             }
         }

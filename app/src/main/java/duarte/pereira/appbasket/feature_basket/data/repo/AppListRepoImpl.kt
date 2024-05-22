@@ -1,6 +1,7 @@
 package duarte.pereira.appbasket.feature_basket.data.repo
 
 import android.util.Log
+import android.util.Log.i
 import duarte.pereira.appbasket.feature_basket.data.di.IoDispatcher
 import duarte.pereira.appbasket.feature_basket.data.local.BasketDao
 import duarte.pereira.appbasket.feature_basket.data.mapper.toAppItemListFromLocal
@@ -47,11 +48,16 @@ class AppListRepoImpl(
 
     private suspend fun refreshRoomCache() {
         val response = api.getAllApps()
+        i("AppBasket", " response: ${response.body()!!.responses.listApps.datasets.all.data.list}")
         if (response.isSuccessful && response.body() != null) {
-            dao.addAllApps(response.body()!!.responses.listApps.datasets.all.data.list.toLocalItemListFromRemote())
+            i("AppBasket", "adding apps to dao")
+            dao.addAllApps(response.body()!!.responses.listApps.datasets.all.data.list.filterNotNull().toLocalItemListFromRemote())
         }
-//        dao.addAllApps(remoteAppItems.toLocalItemListFromRemote())
     }
 
-    private fun isCacheEmpty(): Boolean = dao.getAllApps().isEmpty()
+    private fun isCacheEmpty(): Boolean {
+        var empty = true
+        if (dao.getAllApps().isNotEmpty()) empty = false
+        return empty
+    }
 }

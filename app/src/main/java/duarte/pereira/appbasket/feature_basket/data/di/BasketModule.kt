@@ -10,9 +10,11 @@ import dagger.hilt.components.SingletonComponent
 import duarte.pereira.appbasket.feature_basket.data.local.BasketDao
 import duarte.pereira.appbasket.feature_basket.data.local.BasketDatabase
 import duarte.pereira.appbasket.feature_basket.data.remote.BasketApi
+import duarte.pereira.appbasket.feature_basket.data.repo.AppListRepoImpl
+import duarte.pereira.appbasket.feature_basket.domain.repo.AppListRepo
+import kotlinx.coroutines.CoroutineDispatcher
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
 import javax.inject.Singleton
 
 @Module
@@ -31,7 +33,7 @@ object BasketModule {
             .addConverterFactory(
                 GsonConverterFactory.create()
             )
-            .baseUrl("https://ws2.aptoide.com/api/6/")
+            .baseUrl(APPS_BASE_URL)
             .build()
     }
 
@@ -48,8 +50,14 @@ object BasketModule {
         Room.databaseBuilder(
             appContext.applicationContext,
             BasketDatabase::class.java,
-            "basket_database"
+            DATABASE_NAME
         ).fallbackToDestructiveMigration().build()
+
+    @Provides
+    @Singleton
+    fun providesTodoRepo(db: BasketDatabase, api: BasketApi, @IoDispatcher dispatcher: CoroutineDispatcher): AppListRepo {
+        return AppListRepoImpl(db.dao, api, dispatcher)
+    }
 
     private const val DATABASE_NAME = "basket_database"
     private const val APPS_BASE_URL = "https://ws2.aptoide.com/api/6/bulkRequest/api_list/listApps/"

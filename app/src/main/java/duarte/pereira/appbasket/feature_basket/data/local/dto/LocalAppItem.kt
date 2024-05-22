@@ -6,11 +6,11 @@ import com.google.gson.annotations.SerializedName
 
 @Entity(tableName = "basket")
 data class LocalAppItem(
-    @PrimaryKey(autoGenerate = true)
-    val id: Int?,
+    @PrimaryKey
+    val id: Long?,
     val name: String,
     val packageName: String,
-    val store_id: Int,
+    val store_id: Long,
     val store_name: String,
     val vername: String,
     val vercode: Int,

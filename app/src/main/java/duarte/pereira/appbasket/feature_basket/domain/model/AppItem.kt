@@ -5,7 +5,7 @@ data class AppItem(
     val packageName: String,
     val icon: String,
     val graphic: String,
-    val id: Int?,
+    val id: Long?,
     val downloads: Long,
     val rating: Double,
     val size: Long

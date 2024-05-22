@@ -59,6 +59,7 @@ class AppListViewModel @Inject constructor(
                         order = _appList.value.order,
                         isLoading = false
                     )
+
                 }
                 is BasketUseCaseResult.Error -> {
                     _appList.value = _appList.value.copy(

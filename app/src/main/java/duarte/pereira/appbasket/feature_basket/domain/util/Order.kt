@@ -4,14 +4,14 @@ sealed class Order(
     val sort: Sort
 ) {
     class Name(sort: Sort): Order(sort)
-    class Size(sort: Sort): Order(sort)
+    class Rating(sort: Sort): Order(sort)
     class Downloads(sort: Sort): Order(sort)
 
     // TODO re-think naming
     fun copy(sort: Sort): Order =
         when(this) {
             is Name -> Name(sort)
-            is Size -> Size(sort)
+            is Rating -> Rating(sort)
             is Downloads -> Downloads(sort)
         }
 }
