@@ -13,7 +13,6 @@ import duarte.pereira.appbasket.feature_basket.domain.util.Sort
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -46,6 +45,14 @@ class AppListViewModel @Inject constructor(
         getAppItems()
     }
 
+    /**
+     * Retrieves app items asynchronously from the repository using BasketUseCases. Cancels any
+     * previously running job to avoid redundant calls. Upon successful retrieval, updates the
+     * State of _appList with the retrieved app items, order, and sets isLoading flag to false.
+     * In case of an error during retrieval, updates _appList with an error label and sets
+     * isLoading flag to false. Uses the provided coroutine dispatcher and errorHandler to
+     * handle coroutine execution and errors respectively.
+     */
     fun getAppItems(){
         getAppItemsJob?.cancel()
 

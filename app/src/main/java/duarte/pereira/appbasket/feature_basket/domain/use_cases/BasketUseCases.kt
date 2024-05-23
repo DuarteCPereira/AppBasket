@@ -6,6 +6,10 @@ import duarte.pereira.appbasket.feature_basket.domain.util.Order
 import duarte.pereira.appbasket.feature_basket.domain.util.Sort
 import javax.inject.Inject
 
+/**
+ * Class responsible for the business logic of the app list feature. It encapsulates both the repo
+ * access and the sorting that should be done.
+ */
 class BasketUseCases @Inject constructor(
     private val repo: AppListRepo
 ) {

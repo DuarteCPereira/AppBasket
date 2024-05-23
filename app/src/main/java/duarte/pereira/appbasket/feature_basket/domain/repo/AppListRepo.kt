@@ -2,9 +2,13 @@ package duarte.pereira.appbasket.feature_basket.domain.repo
 
 import duarte.pereira.appbasket.feature_basket.domain.model.AppItem
 
-// TODO improve Doc: Updates the local cache
-// When we are finish with the app this will be heavily tied to retrofit api and room database
-// This class acts as a dummy implementation of this repo class, without being tied to room or retrofit
+/**
+ * Repository interface defining methods for managing app items. This interface abstracts
+ * the data retrieval operations from both local cache and remote server, providing a
+ * unified access point for accessing app data. Implementations of this interface, such as
+ * AppListRepoImpl, will typically be closely integrated with Retrofit API and Room database,
+ * but this interface itself remains decoupled from specific implementation details.
+ */
 interface AppListRepo {
     suspend fun getAllApps(): List<AppItem>
     suspend fun getAllAppsFromLocalCache(): List<AppItem>

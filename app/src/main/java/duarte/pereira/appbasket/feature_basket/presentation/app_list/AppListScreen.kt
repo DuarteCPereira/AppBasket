@@ -13,7 +13,6 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
-import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Divider
@@ -52,17 +51,26 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AppListScreen(viewModel: AppListViewModel = hiltViewModel()) {
-    val state = viewModel.appList.value
+    val appList = viewModel.appList.value
     val snackbarHostState = remember { SnackbarHostState() }
 
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     val scope = rememberCoroutineScope()
 
+    /**
+     * By placing the data fetching logic inside a LaunchedEffect with a constant key (true), the
+     * code ensures that the data fetching happens automatically when the composable is first
+     * rendered. This eliminates the need for manual triggers and simplifies the logic for loading
+     * initial data. Only executes the block once, ideal for initial data loading.
+     */
     LaunchedEffect(key1 = true) {
         viewModel.getAppItems()
     }
     val currentContext = LocalContext.current
 
+    /**
+     * The ModalNavigationDrawer composable provides a sliding drawer that can be opened and closed.
+     */
     ModalNavigationDrawer(
         drawerState = drawerState,
         drawerContent = {
@@ -76,7 +84,7 @@ fun AppListScreen(viewModel: AppListViewModel = hiltViewModel()) {
                     )
                     Divider()
                     SortingDrawer(
-                        appItemOrder = state.order,
+                        appItemOrder = appList.order,
                         onOrderChange = { order ->
                             viewModel.onSort(order)
                         })
@@ -84,6 +92,9 @@ fun AppListScreen(viewModel: AppListViewModel = hiltViewModel()) {
             }
         }
     ) {
+        /**
+         * Provides the basic structure of the app screen, including the top app bar, main content, and a snackbar host.
+         */
         Scaffold(
             topBar = {
                 CenterAlignedTopAppBar(
@@ -120,7 +131,6 @@ fun AppListScreen(viewModel: AppListViewModel = hiltViewModel()) {
             },
             snackbarHost = { SnackbarHost(hostState = snackbarHostState) }
         ) { padding ->
-            //TODO see why it works well like this
             Box(
                 contentAlignment = Alignment.TopStart,
                 modifier = Modifier
@@ -137,7 +147,7 @@ fun AppListScreen(viewModel: AppListViewModel = hiltViewModel()) {
                             .padding(horizontal = 12.dp)
                             .padding(top = 64.dp)
                     ) {
-                        items(state.appItems) { app ->
+                        items(appList.appItems) { app ->
                             AppItemCard(
                                 appItem = app,
                                 modifier = Modifier
@@ -148,7 +158,7 @@ fun AppListScreen(viewModel: AppListViewModel = hiltViewModel()) {
                         }
                     }
                 }
-                if (state.isLoading) {
+                if (appList.isLoading) {
                     Column(
                         modifier = Modifier.fillMaxSize(),
                         verticalArrangement = Arrangement.Center,
@@ -161,14 +171,14 @@ fun AppListScreen(viewModel: AppListViewModel = hiltViewModel()) {
                         )
                     }
                 }
-                if (state.error != null) {
+                if (appList.error != null) {
                     Column(
                         modifier = Modifier.fillMaxSize(),
                         verticalArrangement = Arrangement.Center,
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
                         Text(
-                            text = state.error,
+                            text = appList.error,
                             fontSize = 30.sp,
                             lineHeight = 36.sp
                         )

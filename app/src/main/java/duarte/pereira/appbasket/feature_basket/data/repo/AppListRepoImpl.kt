@@ -19,6 +19,12 @@ import java.net.ConnectException
 import java.net.UnknownHostException
 import kotlin.concurrent.thread
 
+/**
+ * Repository implementation for managing app items, handling data retrieval
+ * from both local cache and remote server. Uses BasketDao for local database
+ * interactions and BasketApi for remote data fetching. Also includes methods
+ * for refreshing the local cache and checking cache status.
+ */
 class AppListRepoImpl(
     private val dao: BasketDao,
     private val api: BasketApi,

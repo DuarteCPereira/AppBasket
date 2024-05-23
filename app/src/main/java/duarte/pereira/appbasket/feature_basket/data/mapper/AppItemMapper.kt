@@ -4,6 +4,11 @@ import duarte.pereira.appbasket.feature_basket.data.local.dto.LocalAppItem
 import duarte.pereira.appbasket.feature_basket.data.remote.dto.RemoteAppItem
 import duarte.pereira.appbasket.feature_basket.domain.model.AppItem
 
+/**
+ * This file is responsible for converting the different types of App classes. It is extremely important,
+ * since it will ease the isolation of the different layers.
+ */
+
 fun LocalAppItem.toRemoteAppItem(): RemoteAppItem =
     RemoteAppItem(
         id = id,
