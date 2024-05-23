@@ -4,6 +4,8 @@
 
 Welcome to App Basket! This app provides you with access to the most trending apps of the moment.
 
+If you want to give it a try download the [app-basket.apk](https://github.com/DuarteCPereira/AppBasket/blob/main/apk/app-basket.apk) file in this project's apk/ directory.
+
 ## Features
 
 ### App List
