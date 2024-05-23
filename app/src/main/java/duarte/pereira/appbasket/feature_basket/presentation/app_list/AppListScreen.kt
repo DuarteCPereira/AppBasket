@@ -61,7 +61,7 @@ fun AppListScreen(viewModel: AppListViewModel = hiltViewModel()) {
      * By placing the data fetching logic inside a LaunchedEffect with a constant key (true), the
      * code ensures that the data fetching happens automatically when the composable is first
      * rendered. This eliminates the need for manual triggers and simplifies the logic for loading
-     * initial data. Only executes the block once, ideal for initial data loading.
+     * iinitial data. Only executes the block once, ideal for initial data loading.
      */
     LaunchedEffect(key1 = true) {
         viewModel.getAppItems()
