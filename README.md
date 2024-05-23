@@ -27,3 +27,15 @@ Press each app to gather more information about it.
 ### Updates Reminder
 Get notified whenever new apps are available on App Basket
 <p align="center"><img src="logo/UpdateNotification.png" alt="AppBasket" height="300px"></p>
+
+### Download your favorite Apps (Comming soon)
+Dowload apps either from the App List our the App Details screen. 
+
+<table align="center">
+  <tr>
+    <td><img src="logo/AppListDownload.png" alt="AppList" height="300px"></td>
+    <td style="width: 40px;"></td>
+    <td><img src="logo/AppDetailsDownload.png" alt="AppListSort" height="300px"></td>
+  </tr>
+</table>
+
