@@ -4,33 +4,6 @@ import duarte.pereira.appbasket.feature_basket.data.local.dto.LocalAppItem
 import duarte.pereira.appbasket.feature_basket.data.remote.dto.RemoteAppItem
 import duarte.pereira.appbasket.feature_basket.domain.model.AppItem
 
-//fun AppItem.toLocalAppItem(): LocalAppItem =
-//    LocalAppItem(
-//        name = name,
-//        packageName = packageName,
-//        icon = icon,
-//        graphic = graphic,
-//        id = id
-//    )
-
-//fun AppItem.toRemoteAppItem(): RemoteAppItem =
-//    RemoteAppItem(
-//        name = name,
-//        packageName = packageName,
-//        icon = icon,
-//        graphic = graphic,
-//        id = id
-//    )
-
-//fun LocalAppItem.toAppItem(): AppItem =
-//    AppItem(
-//        name = name,
-//        packageName = packageName,
-//        icon = icon,
-//        graphic = graphic,
-//        id = id
-//    )
-
 fun LocalAppItem.toRemoteAppItem(): RemoteAppItem =
     RemoteAppItem(
         id = id,
@@ -54,16 +27,6 @@ fun LocalAppItem.toRemoteAppItem(): RemoteAppItem =
         uptype = uptype
     )
 
-//fun RemoteAppItem.toAppItem(): AppItem {
-//    return AppItem(
-//        name = name,
-//        packageName = packageName,
-//        icon = icon,
-//        graphic = graphic,
-//        id = id
-//    )
-//}
-
 fun RemoteAppItem.toLocalAppItem(): LocalAppItem {
     return LocalAppItem(
         id = id,
@@ -74,7 +37,6 @@ fun RemoteAppItem.toLocalAppItem(): LocalAppItem {
         vername = vername,
         vercode = vercode,
         md5sum = md5sum,
-//        apk_tags = apk_tags,
         size = size,
         downloads = downloads,
         pdownloads = pdownloads,
@@ -87,28 +49,6 @@ fun RemoteAppItem.toLocalAppItem(): LocalAppItem {
         uptype = uptype
     )
 }
-
-//fun List<AppItem>.toLocalAppItemList(): List<LocalAppItem> =
-//    this.map { app ->
-//        LocalAppItem(
-//            name = app.name,
-//            packageName = app.packageName,
-//            icon = app.icon,
-//            graphic = app.graphic,
-//            id = app.id
-//        )
-//    }
-
-//fun List<AppItem>.toRemoteAppItemList(): List<RemoteAppItem> =
-//    this.map { app ->
-//        RemoteAppItem(
-//            name = app.name,
-//            packageName = app.packageName,
-//            icon = app.icon,
-//            graphic = app.graphic,
-//            id = app.id
-//        )
-//    }
 
 fun List<LocalAppItem>.toAppItemListFromLocal(): List<AppItem> =
     this.map { app ->
@@ -123,28 +63,6 @@ fun List<LocalAppItem>.toAppItemListFromLocal(): List<AppItem> =
             size = app.size
         )
     }
-
-//fun List<LocalAppItem>.toRemoteItemListFromLocal(): List<RemoteAppItem> =
-//    this.map { app ->
-//        RemoteAppItem(
-//            name = app.name,
-//            packageName = app.packageName,
-//            icon = app.icon,
-//            graphic = app.graphic,
-//            id = app.id
-//        )
-//    }
-
-//fun List<RemoteAppItem>.toAppItemListFromRemote(): List<AppItem> =
-//    this.map { app ->
-//        AppItem(
-//            name = app.name,
-//            packageName = app.packageName,
-//            icon = app.icon,
-//            graphic = app.graphic,
-//            id = app.id
-//        )
-//    }
 
 fun List<RemoteAppItem>.toLocalItemListFromRemote(): List<LocalAppItem> =
     this.map { app ->

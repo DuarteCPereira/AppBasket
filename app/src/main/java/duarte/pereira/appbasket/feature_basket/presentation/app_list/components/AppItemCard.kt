@@ -1,6 +1,7 @@
 package duarte.pereira.appbasket.feature_basket.presentation.app_list.components
 
 import android.content.Context
+import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -66,7 +67,7 @@ fun AppItemCard(
                 size = 140.dp
             )
             Spacer(modifier = Modifier.height(8.dp))
-            AppCardInfo(appItem)
+            AppCardInfo(appItem, currentContext)
         }
     }
     if (showDialog) {
@@ -78,7 +79,7 @@ fun AppItemCard(
 }
 
 @Composable
-fun AppCardInfo(appItem: AppItem) {
+fun AppCardInfo(appItem: AppItem, currentContext: Context) {
     Column(
         verticalArrangement = Arrangement.SpaceBetween,
         modifier = Modifier.fillMaxSize()
@@ -115,7 +116,13 @@ fun AppCardInfo(appItem: AppItem) {
                     style = MaterialTheme.typography.labelSmall,
                     fontSize = 12.sp
                 )
-                DownloadButton(size = 32.dp, isDownloaded = false, onClick = { })
+                DownloadButton(size = 32.dp, isDownloaded = false, onClick = {
+                    Toast.makeText(
+                        currentContext,
+                        "Download functionality is not available in demo mode",
+                        Toast.LENGTH_LONG
+                    ).show()
+                })
             }
 
         }

@@ -6,13 +6,6 @@ import retrofit2.Response
 import retrofit2.http.GET
 
 interface BasketApi {
-//    @GET("bulkRequest/api_list/listApps")
-//    suspend fun getAllApps(): List<RemoteAppItem>
-
     @GET("bulkRequest/api_list/listApps")
-    suspend fun getAllApps(): Response<ApiResponse>
-
-    // TODO re-think if needed
-//    @GET("listApps?orderBy=\"id\"")
-//    suspend fun getAppById(@Query("equalTo") id: Int?): Map<String, RemoteAppItem>
+    suspend fun getAllApps(): ApiResponse
 }

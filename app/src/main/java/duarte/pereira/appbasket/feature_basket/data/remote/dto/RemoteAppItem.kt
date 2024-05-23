@@ -21,7 +21,7 @@ data class RemoteAppItem(
     val updated: String,
     val rating: Double,
     val icon: String,
-    val graphic: String,
+    val graphic: String?,
     val uptype: String
 )
 

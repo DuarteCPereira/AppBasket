@@ -13,17 +13,4 @@ interface BasketDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addAllApps(apps: List<LocalAppItem>)
-
-    // TODO re-think if needed
-//    @Query("SELECT * FROM basket WHERE id = :id")
-//    suspend fun getApp(id: Int): LocalAppItem?
-
-    // TODO re-think if needed
-//    @Insert(onConflict = OnConflictStrategy.REPLACE)
-//    suspend fun addApp(app: LocalAppItem): Long
-
-    // TODO re-think if needed
-/*
-    @Delete
-    suspend fun deleteAppItem(app: LocalApp)*/
 }

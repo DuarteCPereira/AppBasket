@@ -9,21 +9,16 @@ import javax.inject.Inject
 class BasketUseCases @Inject constructor(
     private val repo: AppListRepo
 ) {
-    suspend fun downloadApp() {
-
-    }
-
-    // TODO Fix this method. Order must be done by size and downloads
     suspend fun getAllAppItems(
-        order: Order, //= Order.Name(Sort.Down)
-    ): BasketUseCaseResult{
+        order: Order,
+    ): BasketUseCaseResult {
         var apps = repo.getAllAppsFromLocalCache()
 
-        if(apps.isEmpty()){
+        if (apps.isEmpty()) {
             apps = repo.getAllApps()
         }
 
-        return when (order.sort){
+        return when (order.sort) {
             is Sort.Down -> {
                 when (order) {
                     is Order.Name -> BasketUseCaseResult.Success(apps.sortedByDescending { it.name.lowercase() })
@@ -31,6 +26,7 @@ class BasketUseCases @Inject constructor(
                     is Order.Downloads -> BasketUseCaseResult.Success(apps.sortedByDescending { it.downloads })
                 }
             }
+
             is Sort.Up -> {
                 when (order) {
                     is Order.Name -> BasketUseCaseResult.Success(apps.sortedBy { it.name.lowercase() })

@@ -15,7 +15,6 @@ data class LocalAppItem(
     val vername: String,
     val vercode: Int,
     val md5sum: String,
-//    val apk_tags: List<String>,
     val size: Long,
     val downloads: Long,
     val pdownloads: Long,
@@ -24,7 +23,7 @@ data class LocalAppItem(
     val updated: String,
     val rating: Double,
     val icon: String,
-    val graphic: String,
+    val graphic: String?,
     val uptype: String
 )
 

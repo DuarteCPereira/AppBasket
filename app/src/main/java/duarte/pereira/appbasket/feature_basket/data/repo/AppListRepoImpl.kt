@@ -10,10 +10,14 @@ import duarte.pereira.appbasket.feature_basket.data.remote.BasketApi
 import duarte.pereira.appbasket.feature_basket.domain.model.AppItem
 import duarte.pereira.appbasket.feature_basket.domain.repo.AppListRepo
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
+import okhttp3.internal.wait
 import retrofit2.HttpException
 import java.net.ConnectException
 import java.net.UnknownHostException
+import kotlin.concurrent.thread
 
 class AppListRepoImpl(
     private val dao: BasketDao,
@@ -48,11 +52,13 @@ class AppListRepoImpl(
 
     private suspend fun refreshRoomCache() {
         val response = api.getAllApps()
-        i("AppBasket", " response: ${response.body()!!.responses.listApps.datasets.all.data.list}")
-        if (response.isSuccessful && response.body() != null) {
-            i("AppBasket", "adding apps to dao")
-            dao.addAllApps(response.body()!!.responses.listApps.datasets.all.data.list.filterNotNull().toLocalItemListFromRemote())
-        }
+        i("AppBasket", "response: ${response.responses.listApps.datasets.all.data.list}")
+        try {
+            dao.addAllApps(
+                response.responses.listApps.datasets.all.data.list.filterNotNull()
+                    .toLocalItemListFromRemote()
+            )
+        } catch (e: Exception) { i("AppBasket", "$e") }
     }
 
     private fun isCacheEmpty(): Boolean {
