@@ -21,6 +21,11 @@ class AppListViewModel @Inject constructor(
     private val basketUseCases: BasketUseCases,
     @IoDispatcher private val dispatcher: CoroutineDispatcher
 ): ViewModel() {
+     /**
+      * A possible improvement to this viewModel would be to use flows on both these states in order
+      * to allow this viewModel to be decoupled from an Android project as well as enabling the use
+      * of flow operators
+      */
     private val _appList = mutableStateOf(AppListState(order = Order.Downloads(sort = Sort.Down)))
     val appList: State<AppListState> = _appList
 
