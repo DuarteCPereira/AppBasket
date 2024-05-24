@@ -66,10 +66,12 @@ The three main components are:
 * [Dagger Hilt](https://dagger.dev/hilt/) for dependency injection.
 * [Material Design](https://material.io/develop/android/docs/getting-started/) theme configured with, [Material Theme Builder](https://material-foundation.github.io/material-theme-builder/)
 * [Coroutines](https://kotlinlang.org/docs/reference/coroutines-overview.html) used to manage the local storage i.e. `writing to and reading from the database`.
-* [Room](https://developer.android.com/topic/libraries/architecture/room) persistence library which provides an abstraction layer over SQLite to allow for more robust database.
+* [Room](https://developer.android.com/topic/libraries/architecture/room) persistence library provides an abstraction layer over SQLite, allowing the implementation of a local database that enables users to use the app without an internet connection.
 * [Jetpack Compose](https://developer.android.com/develop/ui/compose) for building the app's UI.
 * [Coil](https://coil-kt.github.io/coil/) An image loading library for Android backed by Kotlin Coroutines
-* 
+* [Alarm Manager](https://developer.android.com/reference/android/app/AlarmManager) allows the application to be notified every 30 minutes to deploy notifications.
+* [Broadcast Receiver](https://developer.android.com/reference/android/content/BroadcastReceiver) that receives the intents sent by the Alarm Manager and triggers notifications based on those intents.
+  
 ## Future improvements 
 This section intends to pinpoint some improvements that due to the lack of time were not implemented.
 - **Testing**: Testing is imperative as a standard of quality, since it increases drastically the stability of any project. The main types of testing I would apply to this project would be: Unit testing, UI testing and Integration testing.
