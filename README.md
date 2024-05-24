@@ -40,6 +40,7 @@ This app is built on two major architectural principles:
 ### [Model-View-ViewModel (MVVM)](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93viewmodel) 
 
 This pattern facilitates the separation of development concerns, particularly between graphical interface and the Model that comes from the busisness logic.
+
   ![image](https://github.com/DuarteCPereira/AppBasket/assets/76401129/5e10f630-536d-4960-91e6-36746c75d58f)
 
   - **Model**: Represents the data and business logic of the application. It notifies the ViewModel of any data changes, ensuring the app always displays the most current data.
